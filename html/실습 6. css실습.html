@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css 애벌레</title>
+
+    <style>
+        div {width: 150px; height: 150px; border-radius: 100px; position: absolute;}
+        .a { background-color:rgb(119, 199, 199);}
+        .b { background-color:rgb(50, 91, 90); left:90px; z-index: 2; top:90px;}
+        .c { background-color:darkblue; left: 130px; z-index: 3; top:150px;}
+        .d { background-color:skyblue; left: 200px; z-index: 4; top: 140px;}
+        .e { background-color:greenyellow; left: 300px; z-index: 5; top:150px;}
+        .nose-1 { background-color: antiquewhite; top: 100px; z-index: 5; width: 10px; height: 10px;}
+        .eye-1 { background-color: rgb(122, 61, 61); top: 50px; left: 50px; z-index: 5; width: 20px; height: 20px;}
+        .eye-2 { background-color: rgb(249, 248, 248); top: 50px; left: 50px; z-index: 4; width: 30px; height: 30px;}
+        .mouse-1 { background-color: rgb(212, 206, 199); top: 120px; left: 50px; z-index: 5; width: 10px; height: 10px;}
+        .img { width: 600px; height: 600px; opacity: 1; z-index: 10;}
+    </style>
+</head>
+<body>
+    <div class="a"></div>
+        <div class="nose-1"></div>
+        <div class="eye-1"></div>
+        <div class="eye-2"></div>
+        <div class="mouse-1"></div> 
+    <div class="b"></div>
+    <div class="c"></div>   
+    <div class="d"></div>
+    <div class="e"></div>
+    <img class="img" src="grass.jpg">
+</body>
+</html>
