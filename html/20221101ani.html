@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+</head>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+            position: relative;
+            animation-name: anime;
+            animation-delay: 2s;
+            animation-duration: 2s;
+            animation-timing-function: ease;
+            animation-iteration-count: 3;
+        }
+        /* 애니메이션 속성들 */
+        /* animation-name: anime; 설정한 애니메이션 이름
+            animation-duration: 2s; 애니메이션의 시간
+            animation-iteration-count: 3; 애니메이션 반복 횟수  */
+            /* animation-delay: 1s; 애니메이션 시작전에 잠깐 멈췄다 시작하게 함 */
+            /* animation-timing-function: ease-in-out; 애니메이션이 움직이는 속도 조절 */
+
+
+        @keyframes anime {
+            /* from {left: 0px;}
+            to {left: 100px;} */
+            0% {left: 0px;}
+            50% {left: 500px;}
+            100% {left: 100px;}
+        }
+        /* 현재 position: relative; 로 지정했으므로 left 지정이 가능하다. 
+        @keyframes 그리고 설정한 이름 anime */
+        /* 1. from {left: 0px;}
+            to {left: 100px;} 이렇게 하면 0에서 100px로 간다 */
+            /* 2. 퍼센트 (세부적으로 애니메이션 상태 나누기. 0, 25, 50, 100)
+            0% {left: 0px;}
+            50% {left: 200px;}
+            100% {left: 100px;} */
+       
+        .div1 {
+            border-radius: 50%;
+            background-color: rgb(192, 114, 150);
+            animation-name: ball;
+            animation-delay: 2s;
+            animation-duration: 5s;
+            animation-iteration-count: 10;
+        }
+
+        @keyframes ball {
+            to { top : 100px; opacity: 0.5;}
+            from { top : 300px; opacity: 1;}
+        }
+ 
+ </style>
+
+<body>
+    <div class="div1"></div>
+    <div class="div2"></div>
+</body>
+</html>

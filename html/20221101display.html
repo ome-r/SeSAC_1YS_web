@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display</title>
+
+    <style>
+        .d-inline1 {
+            display: inline;
+            background-color: blueviolet;
+        }
+        /* 본래 인라인 요소가 이닌 것에 인라인을 주면 inline으로 된다. */
+        /* 인라인 요소는 블록 요소와 달리 크기 조절이 안된다  */
+        /* 만약 인라인인데 블록처럼 크기를 조절하고 싶다면 inline-block 속성을 이용한다  */
+
+        /* .d-inline2 {
+            background-color: aqua;
+            display: block;
+            width: 50%;
+            height: 300px;
+        } */
+
+        /* div는 본래 block요소이므로 줘도 차이가 없어진다 */
+        /* 이때 블록요소는 임의로 크기 조정을 할 수 있다  */
+
+        .d-inline2 {
+            background-color: aqua;
+            display: inline-block;
+            width: 100px;
+        }
+
+        /* display:flex를 주면 바로 아래 자식이 inline-block으로 지정되며 크기 조정이 가능하게 된다. */
+        /* flex의 장점은 정렬이 가능하다는 것이다.  */
+        /* justify-content는 inline이나 inline-block만 적용이 된다. 가로정렬 */
+        /* 세로 정렬은 align-items 이때 높이가 있어야 보인다.*/
+        .d-flex {
+            display: flex;
+            align-items: center;
+            height: 100px;
+        }
+
+        /* display: none; 의 특징은 크기를 차지하지 않고 보이지 않게 된다  */
+        .d-flex {
+            display: none;
+            align-items: center;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-inline1">
+        d-inline1
+    </div>    
+    <div class="d-inline2">
+        d-inline2
+    </div>   
+    <div class="d-flex">
+     <div style="background-color: rgb(46, 145, 94); width: 10px;">
+        <div>1</div>
+        <div>2</div>
+    </div>
+    <div style="background-color: blue;">
+        <div>3</div>
+    </div>
+    <div>4</div>
+    </div>   
+</body>
+</html>

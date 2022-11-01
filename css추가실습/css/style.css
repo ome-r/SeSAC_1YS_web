@@ -1,0 +1,130 @@
+/* COMMON */
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #b1e1e2;
+}
+
+section {
+  width: 1000px;
+  height: 600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -40%);
+}
+
+section .sky {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+section .sky .sun {
+  width: 180px;
+  position: absolute;
+  display: block;
+  left: 50%;
+  margin-left: -90px;
+  top: -130px;
+  transform-origin: center 600px;
+}
+
+section .sky .moon {
+  width: 160px;
+  position: absolute;
+  left: 50%;
+  margin-left: -80px;
+  top: -130px;
+  transform-origin: center 600px;
+}
+
+section .sky .cloud_1 {
+  position: absolute;
+  width: 160px;
+  left: 0%;
+  top: -30px;
+}
+
+section .sky .cloud_2 {
+  position: absolute;
+  width: 90px;
+  left: 12%;
+  top: 20px;
+}
+
+section .city .city_img {
+  position: absolute;
+  bottom: 0px;
+  width: 1000px;
+}
+
+.sun1 {
+  animation-name: sun11;
+  position: relative;
+  animation-duration: 5s;
+  animation-iteration-count: 5;
+  animation-direction: reverse;  
+}
+
+@keyframes sun11 {
+  from {
+    transform: rotate(90deg) translateX(100%); width: 300px; opacity: 0;
+    transform: rotate(45deg) translateX(1000px); width: 300px; 
+
+
+  }
+  to {transform: rotate(-90deg) translateX(0px); width: 150px; opacity: 1;}
+
+
+ /* 0% {transform: rotate(-90deg) translate(600px); width: 100px; opacity: 0;}
+ 25%  {transform: rotate(-45deg) translate(600px); width: 100px;}
+ 50% {transform: rotate(00deg) translate(0px);width: 100px;}
+ 100% {transform: rotate(90deg) translate(600px); width: 100px;} */
+
+}
+
+.moon1 {
+  animation-name: moon11;
+  position: relative;
+  animation-delay: 5;
+  animation-duration: 5s;
+  animation-iteration-count: 10;
+
+}
+@keyframes moon11 {
+
+  from {transform: translateX(1000px); width: 150px; opacity: 0;}
+  
+  to {transform: translateX(0px); width: 150px; opacity: 1;}
+}
+
+.cloudd {
+  position: relative;
+  animation-name: cl1;
+  animation-duration: 5s;
+  animation-iteration-count: 5;
+  animation-direction: reverse;  
+}
+
+@keyframes cl1 {
+  from { transform: translate(900px); width: 200px; opacity: 0;}
+  to {transform: translate(); width: 200px;}
+}
+
+.cloudd2 {
+  position: relative;
+  animation-name: cl2;
+  animation-duration: 5s;
+  animation-iteration-count: 5;
+}
+@keyframes cl2 {
+  from {transform: translateX(800px); width: 150px; opacity: 0;}
+  to {transform: translateX(0px); width: 150px;}
+}

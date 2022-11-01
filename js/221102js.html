@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js배우기</title>
+
+    <script>
+
+    //    alert('hello');
+    //     console.log('hello world!');
+
+    //     var a;
+    //     console.log(a);
+    //     var a = 1;
+    //     console.log(a);
+    //     // 이미 선언된 변수 a에 값을 바꿈
+    //     a= 2;
+    //     console.log(a);
+
+    //     let b;
+    //     console.log(b);
+    //     b=2;
+
+        console.log(typeof('문자'));
+        console.log(typeof(245));
+        console.log(typeof(function() {}));
+        console.log(typeof(true));
+        console.log(typeof({}));
+        console.log(typeof([]));
+        console.log(typeof(NaN));
+        console.log(typeof(null));
+
+        var a;
+        console.log(a);
+        var a=1;
+        console.log(a);
+
+        let b;
+        console.log(b);
+        b=1;
+
+        console.log(a + "반갑습니다");
+        console.log( a+b );
+
+        // 함수 선언하기
+        function sesac() {
+            console.log("SeSac HI!");
+        }
+        // 함수 실행하기 
+        sesac();
+
+        // 함수를 실행할 때, 보내는 그 값을 abc라는 변수에 담는다.
+        // 파라미터는 여러개 들어가도 가능, 단 순서대로 적어야 한다 
+        function sesac2(abc, test , d) {
+            alert(abc + " " + d + "hello");
+        }
+        sesac2("홍길동", " ", "12");
+        sesac2("용산");
+        // sesac2( test );
+        // 파라미터로 변수 자체를 넣어서 값을 보낼수도 있다. 
+
+        function init() {
+            console.log("init");
+
+        }
+        function parameter1( a ) {
+            console.log(a);
+        }
+
+        function parameter2( a, b) {
+            console.log( a+ " " + b) ;
+        }
+
+        function parameter3( a, b, c ) {
+            console.log( "a : " + a) ;
+            console.log( "b : " + b) ;
+            console.log( "c : " + c) ;
+        }
+
+        init(); //기본형태 실행
+        parameter1(); //parameter를 받음에도 전달하지 않기
+        parameter1(10); //parameter 1개 전달
+        parameter2(5,3) ;
+        parameter3(1, 2, 3);
+        var variable = "h1";
+        parameter3(variable, variable, variable);
+        parameter3(variable, variable);
+        parameter3(variable);
+
+
+        // js 조건문 if
+        // if (5>3) {
+
+        // }
+        // else if ( 3<2) {
+
+        // }
+        // else {} ;
+ 
+            // if는 범위로 비교, switch는 정확한 값일때 사용
+        var a = prompt("숫자를 입력하세요.");
+        if (a > 10) {
+            console.log("a>10");
+            if (a>7) {
+                console.log("a>7");
+            }
+            else {
+                console.log("a<7"); 
+            }
+            switch(a) {
+                case 8:
+                    console.log("a 8");
+                    break;
+            }
+            
+        }
+        else if (a>5) {
+            console.log("a>5");
+        }
+        else if(a>0) {
+            console.log("a>0");
+        }
+        else {
+            console.log("no!");
+        };
+
+
+        // for문
+        // var i = 0 초기값 / i < 10 조건문 /  i ++ 는 i+1을 줄여서 사용한 것 i에 1을 더한 값 넣기
+        for (var i = 0; i < 10; i ++) {
+            console.log("i :" + i);
+        }
+    
+        //while문             j = j+1; 이 값이 없으면 무한으로 돈다
+        var j=0;
+        while (j <10) {
+            console.log("j:" +j) ;
+            j = j+1;
+        }
+    </script>
+</head>
+
+<body>
+    
+</body>
+</html>
