@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery 테이블</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("button").click( function() {
+			var input = $("input");
+			var tr = $("<tr></tr>");
+			
+			$.each(input, function(i, item) {
+				var td = $("<td></td>").html($(item).val());
+				$(tr).append(td);
+			});
+			$("table").append(tr);
+			$(input).val("");
+		});
+	});
+</script>
+        <!-- <script>
+            var a= 0;
+            function num1 {
+                for( $a=1; $a<1000; $a++){
+            echo("$a<br>"); } 
+            
+            document.write("<br>");
+        };
+        </script> -->
+
+</head>
+<body>
+	작성자 <input type="text"><br>
+	내용 <input type="text"><br>
+	<!-- 영어 <input type="text"><br>
+	수학 <input type="text"><br> -->
+    <br> <br>
+	<button>작성</button>
+	<h2></h2>
+	<table border="1px solid black" width="90%">
+	<tr>
+        <td>번호</td>
+
+        <td>작성자</td>
+        <td>내용</td>
+        <td>작성일</td>
+    </tr>
+	</table>
+</body>
+</html>

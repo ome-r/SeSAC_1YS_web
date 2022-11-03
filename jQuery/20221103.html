@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var cat = {
+            name : '나비',
+            age : 1,
+            mew : function() {
+                return "야옹";
+            }
+        }
+        console.log( cat ); //객체 자체 출력
+        console.log( cat.name) ; //속성이기 때문에 이렇게 적어야 한다.
+        console.log( cat.mew()); //cat이라는 객체 안의 mew라는 함수를 실행
+
+        function hello() {
+            return "안녕";
+        }
+        function hi() {
+            console.log("hi");
+        }
+
+        // hi는 undefined가 나오고, hello함수를 실행한 것은 안녕이 나온다. 
+        // return은 함수당 하나만 , 값을 던져주는 것이다. 
+        console.log( hi()) ;
+        var a= hello();
+        console.log( a);
+
+        // 배열을 만드는 법은 두가지이다. 1 대괄호를 이용 // 2 new Array를 사용해서 만든다 
+        var arr1 = [1,2,3, 'a','b','c'];
+        var arr2 = new Array(1,2,3, 'a','b','c');
+        console.log(arr1); 
+        console.log(arr2); 
+        // index는 배열의 순서가 0부터 시작한다. 
+        console.log(arr1[0]);
+        console.log( arr1.indexOf('a')); 
+        // 배열에는 length라는 속성을 가져올 수 있음. 길이를 가져온다
+        console.log("length : " + arr1.length);
+
+        arr1.push('d')  //가장 마지막에 요소 추가
+        console.log(arr1);
+        arr1.pop(); // 가장 마지막 요소 제거 
+        console.log(arr1);
+
+        arr1.unshift(); //가장 앞의 요소 추가 
+        console.log(arr1);
+
+        arr1.shift(); //가장 앞의 요소 제거
+        console.log(arr1);
+
+        // 배열 가져오는 법 
+        // console.log(arr1[가져올 값]);
+
+        // var ar = [1,2];
+        // // 배열에서 값을 가져올 때는 index를 통해 가져온다
+        // console.log(ar[0]);
+
+        //딕셔너리를 가져올 때에는 key값을 기준으로 가져오기
+        // 단, 배열은 각각이 인덱스가 자동으로 키가 되는 것. 
+        // 딕셔너리는 쌍으로 구성되어 있어 이를 구볅하는 것이 key
+        // 
+        var me = {
+            name: '홍길동',
+            birth : '0101'
+        };
+
+        // 딕셔너리 객체는 []대괄호 와 .으로도 가져올 수 있다.
+        console.log(me);
+        console.log(me["name"]);
+        console.log(me.name);
+
+        me.gender = 'M';
+        me["age"] = 10;
+        console.log(me);
+
+
+        console.log("--------------------");
+        var date = new Date();
+        console.log(date);
+
+        console.log(date.getYear());
+        console.log(date.getMonth());
+        console.log(date.getDate());
+        console.log(date.getDay());
+        console.log(date.getTime());
+        console.log(date.getHours());
+
+
+        console.log("--------------------");
+
+        console.log( Math.min()); // 전달 받은 값 중 가장 작은 값 반환
+        console.log( Math.min(-10, 2, 10));
+        console.log( Math.min(0,'a', 5)); //받은 값 중 문자같은 비교할 수 없는 값은 NaN 을 반환
+
+
+        console.log( Math.max(-10, 2, 10)); // 전달받은 값 중 가장 큰 값 반환
+
+        console.log( Math.random()); //무작위로 반환. 0~1 사이의 소수점 수 반환
+
+        var min=0; var max=10; 
+        console.log(Math.random() * (max-min) + min); // 어떤 최소값과 최댓값 사이에서 반환식. 모르면 암기
+
+        console.log( Math.round(1.2));  
+        console.log( Math.round(-1.7));  //소수점 첫째자리에서 반올림. 기본적으로 정수로 반환
+
+        console.log( Math.floor(1.2)); // 정수를 기준으로 내림
+        console.log( Math.ceil(1.2)); // 정수를 기준으로 올림
+
+
+    </script>
+</body>
+</html>

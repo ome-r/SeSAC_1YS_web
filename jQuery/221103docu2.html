@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 값 변경하기 change , 만들기(추가와 삭제)</title>
+    <script>
+        function imgChange() {
+            var tag = document.querySelector("img");
+            console.log(tag) ;
+            console.log(tag.src); //속성을 가져올때는 . 을 이용해서 가져온다
+            console.log(tag.width);
+            tag.src= "./02.jpg";  //2번 이미지로 변경
+        }
+
+        //추가하기
+        function add() {
+            var li = document.createElement("li"); //그 안에 들어오는 태그를 만들 수 있음. 이땐 li 태그를 만듦
+            li.innerText = "새로운 li";
+            console.log(li); // li 태그 콘솔에 찍기
+
+            var ul = document.querySelector("ul");
+            ul.append(li, "123"); //ul태그에 추가하기 = append, 가장 마지막에 추가한다. 이때는 ul의 자식요소 li태그를 추가, 한번에 여러개 자식 노드를 추가 가능
+            ul.appendChild(li); // 제일 끝에 추가하는데 , 한 개의 자식 노드만 추가
+        }
+
+        //삭제하기 
+        function remove() {
+            var li = document.querySelector("li"); //li 선택자를 선택한다
+            li.remove(); // li를 제거한다. 
+            // removechild는 내가 삭제하고자하는 자식태그와 부모를 다 알아야한다는 차이점
+
+            //부모요소 선택하여 삭제하기
+          // var ul= document.querySelector("ul");
+            //var li2= document.querySelector("li");
+            //ul.removeChild(li2);
+            //부모요소.removechild(자식요소)
+           //console.log(li.parentElement); //li태그의 부모태그 찾기/
+           // li.parentElement.removeChild(li); // 자식요소 삭제 /
+        }
+
+    </script>
+</head>
+<body>
+    <img src="01.jpg" width="100" height="100">
+    <button type="button" onclick="imgChange()"> 이미지 </button>
+
+    <ul>
+        <li>이름</li>
+    </ul>
+    <button type="button" onclick="add()">추가</button>
+    <button type="button" onclick="remove()">삭제</button>
+
+</body>
+</html>

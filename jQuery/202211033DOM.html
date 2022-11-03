@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 값 가져오기</title>
+
+    <script>
+        console.log( document.documentElement); //문서의 모든 요소 가져옴
+        console.log( document.head); // head 태그 가져오기
+        console.log( document.title); // title 가져오기
+        console.log( document.URL); // 내가 접속한 url 가져오기
+        console.log( document.domain); // 내가 접속한 도메인 가져오기 http즉 프로토콜을 제외하고 도메인 ip만
+
+        
+    </script>
+
+</head>
+<body>
+    <img scr="./01.jpg" width="100" height="100">
+    <img scr="./01.jpg" width="100" height="100">
+    <img scr="./01.jpg" width="100" height="100">
+    <div id="div1">
+        <input type="text" id="input1" value="입력값">
+        <p class="css1">p1</p>
+        <p class="css1">p2</p>
+        <div>
+            <p class="css1">p3</p>
+        </div>
+        <button type="button" onclick="getData1();">input 버튼</button> 
+        <button type="button" onclick="getData2();">p태그 버튼</button> 
+
+       <!-- 1. 버튼을 누르면 onclick 실행 2. getData() 실행  3. id가 inpu1인 요소를 찾아서 input 변수에 넣기 4. 선택된 요소의 value를 콘솔에 출력 -->
+    </div>
+
+    <script>
+        console.log( document.getElementById("input1")); //id가 inpu1인 요소를 가져오고 그대로 출력
+        console.log( document.getElementsByClassName("css1")); //class name이 css1인 애들을 가져오는 것 , 여러 개를 가져오고 형태는 하나라도 무조건 리스트로 담겨져온다
+        console.log( document.getElementsByClassName("css1")[0]); //하나만 가져오고 싶다면 []사용. 이렇게 가져오면 0번째의 것을 가져오게 된다
+        console.log( document.getElementsByTagName("img")); //태그를 가져오는데, 마찬가지로 리스트에 담겨져 온다. 하나만 가져오고 싶다면 마찬가지로 인덱스[]사용
+
+        console.log( document.querySelector("#input1")); //괄호 안에는 선택자가 들어간다. 즉 id값이 input1인 것을 가져와달라. 이때 여러개라도 무조건 하나만 가져온다
+        console.log( document.querySelector(".css1")); // 선택자에 해당하는 것 중 가장 위에 있는 하나만 가져옴
+        console.log( document.querySelectorAll(".css1")); // 모두 가져오고 싶으면 all을 사용한다. 배열 즉 리스트로 가져옴
+        console.log( document.querySelectorAll(".css1")[1]); // 배열이므로 이렇게 인덱스를 사용하여 하나만 가져오게 할 수도 있다
+
+        //htmlcollections 는 변화를 실시간 반영하고(살아있고), nodelist는 처음 그상태 그대로 즉 실시간으로 변동되지 않는다. 
+
+        // var input = document.getElementById("input1");
+        // console.log (inout.value); //내가 선택한 요소의 값 가져오기
+
+        function getData1() {
+            var input = document.getElementById("input1");
+            console.log(input.value);
+        }
+
+        function getData2() {
+            var p1 = document.getElementsByClassName("css1")[0];
+            console.log(p1.value);  // p태그에는 value값이 존재하지 않아 오류가 난다.
+            console.log(p1.text);
+            console.log(p1.html);
+
+            //아래의 두 가지만 값이 나오게 된다. 
+            console.log(p1.innerText); //  그 안에 들어갈 글자를 문자로 설정할 수 있음, 단 태그도 문자로 인식
+            console.log(p1.innerHTML); // 내가 적은 태그를 태그로 인식한다. ex strong태그 쓰면 굵은 글씨로 표기
+
+            // p1.innerText = "p태그입니다!";
+            p1.innerHTML = "<strong>p태그입니다</strong>";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 14</title>
+ <!-- // shift + Alt + F. -->
+    <script>
+        var num = 0;
+
+        function Math() {
+
+            var val1 = document.getElementById("kye1").value;
+            //  document.getElementById("kye1").value =2;
+            var val2 = document.getElementById("kye2").value;
+            // return document.getElementById("kye1") = "";   
+            var num1 = Number(val1);
+            var num2 = Number(val2);
+
+            var symbol = document.getElementById("symbol").value;
+            
+            var result = 0;
+            if (symbol === "+") {
+                result = num1 + num2;
+            } else if (symbol === "-") {
+                result = num1 - num2;
+            } else if (symbol === "*") {
+                result = num1 * num2;
+            } else if (symbol === "/") {
+                result = num1 / num2;
+            } else {
+                result = "+(더하기), -(빼기), *(곱하기), /(나누기)중 하나를 입력하십시오"
+            }
+            // document.getElementById("result").innerHTML = result;
+            document.getElementById("result").value = result;
+
+        }
+
+        function restart() {
+            var re = document.getElementById("result");
+            document.getElementById("result").value = "";
+        }
+
+    </script>
+</head>
+
+<body>
+    값1 : <input type="text" id="kye1"> <br>
+    값2 : <input type="text" id="kye2"> <br>
+    연산자 : <input type="text" id="symbol"> <br>
+    결과 :  <input type="text" id="result"> <br>
+    <!-- <div type="text" id="result"> </div> <br> -->
+
+    <button type="button" onclick="Math()">계산하기</button>
+    <button type="button" onclick="restart()">초기화</button>
+
+</body>
+
+</html>

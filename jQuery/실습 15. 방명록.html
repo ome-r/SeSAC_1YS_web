@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 15</title>
+    <!-- 작성한 내용을 table로 받아오도록 만들기 
+    -->
+    <script>
+        var no = 1;
+
+        function write2() {
+
+            // var tb = new Array();
+            // var table2 = '';
+
+
+
+            // 작성자 이름 받기
+            const table = document.getElementById("table1");
+            const tr = document.createElement("tr");
+            const td1 = document.createElement("td");
+            const td2 = document.createElement("td");
+            const td3 = document.createElement("td");
+            const td4 = document.createElement("td");
+
+            td3.innerText = no;
+            no = no+1;
+            tr.append(td3);
+            table.append(tr);
+
+            const name = document.getElementById("author").value;
+            td1.innerText = name;
+
+            tr.append(td1);
+            console.log( tr );
+            table.append(tr);
+
+            const conts = document.getElementById("contents").value;
+            td2.innerText = conts;
+
+            tr.append(td2);
+            table.append(tr);
+            console.log( tr );
+
+
+            td4.innerText = new Intl.DateTimeFormat('kr').format(new Date());
+
+            tr.append(td4);
+            table.append(tr);
+            // var tbl = document.querySelector("table1");
+            // table1.append(name);
+
+            // // 내용 받기
+            // const cont = document.getElementById("content").value;
+
+            // var tbl2 = document.querySelector("table1");
+            // table1.append(cont);
+
+            // // 작성일 받기
+            // const date1 = new Date();
+            // var tabl3 = document.querySelector("table1");
+            // table1.append();
+            // document.getElementById("result").value = table1;
+
+            // table1.append();
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <p>방명록입니다.</p>
+    작성자 <input type="text" id="author"> <br>
+    내용 <input type="text" id="contents"> <br> <br> <br>
+
+    <button type="text" onclick="write2()">작성</button>
+
+    <div>
+        <table border="1" style="border: 1px solid; text-align: center;" id="table1">
+            <thead>
+                <tr>
+                    <td>번호</td>
+                    <td>작성자</td>
+                    <td>내용</td>
+                    <td>작성일</td>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
