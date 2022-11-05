@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="./jquery-ui-1.13.2/jquery-ui-1.13.2/jquery-ui.min.js"></script>
+    <link href="./jquery-ui-1.13.2/jquery-ui-1.13.2/jquery-ui.css">
+    <title>jQuery ui적용하기</title>
+    <style>
+        .div { width: 100px; height: 100px;}
+        .first { background-color: aqua;}
+        .second { background-color: #999;}
+        .third { background-color: rgb(32, 151, 125);}
+        .sizeup { font-size: 30px;}
+    </style>
+    <script>
+        //switchClass의 작동 방식
+        // (a) -> b  : 만약 a가 없더라도, 그 다음 클래스는 생성이 된다. 
+
+        // switchClass(a,b)
+        // switchClass(b,c) c 생성 
+        // switchClass(b,d) b가 d로 바뀐다. 즉 이 경우에는 다른 클래스에는 영향을 주지 않으므로, c와 d가 남게 된다.
+        
+        function second() {
+            $("div").switchClass("first","second", 2000);  // switchClass 를 적용하면 다른 클래스로 천천히 변경된다. 초 = 2000 이렇게 시간 설정이 가능
+        }
+        function sizeup() {
+            $("div").switchClass("second","sizeup", 1000);  // 
+        }
+        function third() {
+            $("div").switchClass("sizeup", "third");  // 
+        }
+        function first() {
+            $("div").switchClass("third","first");  // 
+        }
+    </script>
+</head>
+<body>
+    <div class="first">it's div</div>
+    <button type="button" onclick="second()"> first -> second </button>
+    <button type="button" onclick="sizeup()"> second -> size up </button>
+    <button type="button" onclick="third()"> size up -> third </button>
+    <button type="button" onclick="first()"> third -> first </button>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+
+    <!-- grid 사용하기. row 클래스와 col클래스를 기본형태로 사용한다 like tr td  -->
+    <!-- 가로는 최대한 총 12개의 격자를 가진다. 즉 col을 세개로 나누면 4개만큼의 크기를 나눠갖는다. 
+    12개를 넘치게 되면 내려와버린다.-->
+    <div class="row">
+        <div class="col bg-primary">1</div>
+        <div class="col bg-success">2</div>
+        <div class="col bg-info">3</div>
+    </div>
+    <!-- 만약 일정한 크기를 원하지 않으면, col에 숫자를 지정한다.  -->
+    <div class="row">
+        <div class="col-2 bg-danger">1</div>
+        <div class="col-6 bg-dark">2</div>
+        <div class="col-4 bg-primary">3</div>
+    </div>
+    <hr>
+    <!-- 이때 그리드에 breakpoint를 줄 수 있다. 이때 총 12의 숫자가 되도록 맞춘다.  
+    즉 반응형이 되었을때 크기가 달라진다. 특히 breakpoint md, lg에 따라 각각 1:2 비율 5:1 비율로 변경-->
+    <div class="row">
+        <div class="col-8 col-md-4 col-lg-10 bg-primary">1</div>
+        <div class="col-4 col-md-8 col-lg-2 bg-dark">2</div>
+    </div>
+ <!-- 포른트엔드가 되고싶다면 반응형을 잘 이해해야 한다. -->
+    <div class="row">
+        <div class="col-12 col-sm-6 col-lg-4">
+            <img src="./01.jpg" class="w-10" style="height: 100;">
+        </div>
+        <div class="col-12 co-sm-6 col-lg-8">
+        <p class="bg-secondary">이 이미지는 바다입니다.</p>
+    </div>
+    </div>
+
+    <div class="d-block d-md-block d-lg-none bg-warning" style="height:300px;">  
+        <!-- d-block은 어떤 크기에서든 보이게 하는 class, bg-warning 배경이 경고창 색상 
+         d-sm-none sm이라는 breakpoint가 되었을 때 사라진다-->
+        div
+    </div>
+
+        <div class="d-flex justify-content-center">
+            <!-- bootstrap에 있는 flex속성을 사용해서 버튼정렬 가운데로 만들기 위해 div를 만들어서 감쌌다.  -->
+    <button type="button" class="btn btn-primary" style="margin-top:100px;">Primary</button>   
+    <!-- //여기서 primary는 파란색 의미. -->
+        <!-- // style="margin-top:100px; 이런식으로 스타일을 줄 수도 있음. 즉 bootstrap 자체 클래스 아닌 다른 것도 사용가능 
+        즉 반응형 설정을 하는 것을 의미하며, 이러한 breakpoint는 부트스트랩의 레이아웃 목차에 breakpoint가 있다.-->
+
+    <button type="button" class="btn btn-secondary">Secondary</button>  
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-light">Light</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+
+    <button type="button" class="btn btn-link">Link</button>
+    </div>
+ <!-- 여기는 아코디언 부분 -->
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              제목 부분 #1
+            </button>
+          </h2>                    
+          <!-- // class="accordion-collapse collapse show" 여기서 show가 있으면, 처음에 열린 상태로 보여준다 -->
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>머리글</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+<!-- 여기는 캐러솔 -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="./02.jpg" class="d-block w-50" alt="...">
+                <!-- d-block은 display block으로, 부트스트랩 유틸리티의 display 부분에 설명이 있다. w-100 은 크기  -->
+              </div>
+              <div class="carousel-item">
+                <img src="./01.jpg" class="d-block w-50" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="./02.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+  </body>
+</html>

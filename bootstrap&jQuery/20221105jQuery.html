@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>jQuery</title>
+    <script>
+
+        // 값 가져오기, js와 jQuery
+        function getData() {
+            var val1 = document.getElementById("input1").value;
+            console.log(val1);
+
+            var val2 = $("#input1").val();
+            console.log(val2);
+        }
+        //값 설정하기
+        function SetData() {
+            document.getElementById("input1").value = hi;
+            $("#input1").val("hello");
+        }
+        //스타일 변경하기
+        function setstyle1() {
+          var p = document.querySelector("#p1");
+          p.style = "background-color: yellow; color:blue;";
+        }
+        //jQuery에서 스타일 변경 속성은 .css 를 이용한다.
+         function setstyle2() {
+            $("#p1").css("background-color", "green");  //인자를 적고, 속성(속성이름, 바꿀 것)
+         }
+         function setstyle3() {
+            $("#p1").attr("style", "background-color: blue; color:white;"); //attr은 style뿐 아니라 이미지 태그등 여러 개의 속성 동시 변경에 사용한다.
+         }
+         //요소 변경 - text 와 html
+         function changeText() {
+            console.log($("#p1").text()); //값을 보내면 글자가 변경이 되고, 값을 보내지 않으면 원래 값을 가져온다. 즉 처음에는 p태그입니다 가 띄워진다
+            $("#p1").text("글자 변경")
+         }
+         function changeHTML() {
+            $("#p1").html("<strong>굵은 글자 변경<strong>") //html을 바꾸는 것이다! 즉 태그가 적용이 되는 것이다. 
+         }
+         //요소 추가, js와 jQuery의 차이
+         function append1() {
+            document.querySelector("#p1").append("<h2>h2태그</h2>"); //태그가 그냥 텍스트로 인식
+            $("#p1").append("<h3>h3태그입니다.</h3>"); // jQuery애서 태그는 실제 동작하는 태그로 적용
+         }
+         // 요소 추가의 네가지 종류
+         function append() {
+            $("#ul").append("<li class='append'>append</li>"); //가장 뒤에 추가 / 부모를 선택하고(기준), 자식을 끝으로 
+         }
+         function prepend() {
+            $("#ul").prepend("<li>prepend</li>"); //가장 앞에 추가 / 부모를 선택하고(기준), 자식을 앞으로 추가
+         }
+         function before() {
+            $("#li1").before("<li>before</li>"); //나(자신)를 기준으로, 내가 선택한 형제의 전에 추가, 이때 기준이 되는 li아이디가 삭제되면 추가가 되지 않음
+         }
+         function after() {
+            $("#li1").after("<li>after</li>"); //나(자신)를 기준으로, 내가 선택한 형제의 후에 추가, 이때 기준이 되는 li아이디가 삭제되면 추가가 되지 않음
+         }
+         //요소 삭제
+         function remove1() {
+            $(".append").remove();       // 내가 선택한 스스로를 삭제, 해당이 되는 태그나 요소 등을 넣으면 그것도 삭제 된다. 
+         }
+         function empty() {
+            $("#ul").empty(); //  선택된 모든 자식과 자손 태그를 텅 비운다. 삭제한다
+         }
+         // 요소 탐색
+         function parent() {
+           console.log($("#li1").parent()); //나를 기준으로 직속 부모 하나를 가져온다. 함수를 찾아와서 그 뒤에 바로 실행
+           console.log($("#li").parent().parent()); //jquery는 계속 연결해서 바로바로 사용 가능. 이때는 parent1인 ul을 찾고 그다음 부모인 button을 찾아줌
+        $("#li1").parent().append("<li>parentAppend</li>") // ul을 바로 선택하고 append 하겠다 
+         }
+         
+
+    </script>   
+</head>
+<body>
+    <button type="button" onclick="parent()">탐색 parent</button>
+    <ul id="ul">
+        <li id="li1">기준li</li>
+    </ul> 
+    <button type="button" onclick="remove1()">요소 remove</button>
+    <button type="button" onclick="empty()">요소 empty</button> 
+    <br>
+    <button type="button" onclick="append()">append</button>
+    <button type="button" onclick="prepend()">prepend</button>
+    <button type="button" onclick="before()">before</button>
+    <button type="button" onclick="after()">after</button>
+
+    <p id="p1">p태그입니다.</p>
+  
+    <button type="button" onclick="append1()">요소 추가</button>
+    <br>
+
+    <button type="button" onclick="setstyle1()">js로 바꾸기</button>
+    <button type="button" onclick="setstyle2()">jQuery로 바꾸기</button>
+    <button type="button" onclick="setstyle3()">jQuery로 여러 개 바꾸기</button>
+    <br>
+
+    <button type="button" onclick="changeText()">text 변경</button>
+    <button type="button" onclick="changeHTML()">html 변경</button>
+    
+    <hr>
+    <input type="text" id="input1">
+    <button type="button" onclick="getData()">값 가져오기</button>
+    <button type="button" onclick="getData()">값 설정하기</button>
+</body>
+</html>

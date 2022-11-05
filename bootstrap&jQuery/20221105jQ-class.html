@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>jQuery2 class</title>
+    <style>
+        .class {
+            background-color: #999;
+            font-weight: bold;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <script>
+        function addClass() {
+            $("div").addClass('class'); //클래스를 추가하는 함수
+        }
+        function removeClass() {
+            $("div").removeClass('class'); //클래스를 제거하는 함수 
+        }
+ 
+        function hasClass() {
+            console.log($("div").hasClass('class')); // 내가 이(괄호 안의) 클래스를 가지고 있는지 아닌 지 확인하는 함수, 없으면 false 있으면 true를 콘솔창에 반환하고 있다. 
+        }
+        function toggleClass() {
+            $("div").toggleClass('class'); //없으면 추가, 있으면 삭제하는 함수 
+        }
+    </script>
+</head>
+<body>
+    <div>it's div</div>
+
+    <button type="button" onclick="addClass()">addClass</button>
+    <button type="button" onclick="removeClass()">removeClass</button>
+    <button type="button" onclick="hasClass()">hasClass</button>   
+    <button type="button" onclick="toggleClass()">toggleClass</button>
+
+
+</body>
+</html>
