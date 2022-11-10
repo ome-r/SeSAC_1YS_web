@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <input type="text" id="input1">
+    body태그
+    <div style="width: 100px; height: 800px; background-color:yellow;" id="div1"></div>
+    <script>
+        //마우스 click 이벤트
+        $("#div1").click(function(e){    // 매개변수로 e가 아닌 다른 것을 써도 된다. function(e)를 사용하는 이유는, 이벤트 객체를 의미하는 것이다.
+            console.log( "div click");
+            console.log( "e: ", e);
+        });
+        //hover 이벤트
+        // mouseover, mouseout은 자식 엘리먼트에 접근했을 때도 동작하는 반면, mouseenter와 mouseleave는 자식 엘리먼트에는 동작하지 않습니다.
+        $("#div1").mouseover(function(e){        //올렸을 때 바로 뜨는 이벤트
+            console.log(  "div mouseover ");
+        });        
+        $("#div1").hover(function(e){  
+            console.log(  "div hover1 ");     //마우스 올릴 때 1번
+        }, function() {
+            console.log( "div hover2")  // 마우스 뺄 때 한번 실행되는 이벤트 
+        });
+        //scroll 이벤트
+        $( window ).scroll(function(){
+            console.log( "window scroll");  //스크롤 이벤트
+        });
+      
+
+
+    </script>
+</body>
+</html>
