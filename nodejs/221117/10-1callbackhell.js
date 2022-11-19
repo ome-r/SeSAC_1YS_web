@@ -1,5 +1,5 @@
 //비동기함수 setTimeout사용
-function login(id, pw, cb) {
+function login(id, cb) {
     setTimeout(function() {
         console.log("사용자 입장");
         cb(id);
@@ -24,7 +24,7 @@ function getDetail(video,cb) {
 //    });
 // });
 
-login('kim', '1234', function(user){
+login('kim', function(user){
     getVideo(user, function(videos){
         getDetail(videos[0], function(msg){
             console.log( msg );

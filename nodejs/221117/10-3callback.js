@@ -1,6 +1,7 @@
 function call1(name) {
     setImmediate(function() {
         console.log("사용자는 " + name);
+        call();
     }, 0000);  
 }
 
@@ -23,5 +24,5 @@ function hell() {
 }
 
 let a1 = call1('kim');
-let a = call('kim');
+
  
