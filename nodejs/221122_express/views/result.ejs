@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            color: aqua;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>POST 요청 폼 만들기</h1>
+    <div>id는 <span><%=data.id%></span>입니다 </div>
+    <div>pw는 <span><%=data.pw%></span>입니다 </div>
+
+</body>
+</html>
+<!-- app.post("/postform", (req,res)=>{ // 원래 라우터였던 form에서 postform라우터로 이동한 다음 send안에 문자열이 보이게 된다.
+    console.log(req.body); // 클라이언트가 서버에 보내는 요청을 body에 받아온다. (get과 차이)
+    res.render("result", {data : req.body});
+}) -->
