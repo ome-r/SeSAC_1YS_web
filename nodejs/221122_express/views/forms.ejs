@@ -4,11 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
+    <script>
+        function sendGet(){
+            //axios get을 이용한 통신
+            axios({
+                method : "get", //어떤 메소드로 보내겠다
+                url : "/forms", // 어떤 경로로 보내겠다
+                params: { //보내는 값
+                    name: "condingon"
+                }
+            });
+        }
+    </script>
 </head>
 <body>
+    <button type="button" onclick="sendGet();">get전송</button>
+    <button type="button" onclick="sendPost();">post전송</button>
+
     <form action="/getforms" method="get">
-        <input type="text" name="이름"> 이름
+        <input type="text" name="이름" required/> 이름 <br>
+        <!-- <input type="text" name="id" pattern="/^[a-zA-Z]\w{2,7}$/u" required> ID <br> -->
+        <!-- <input type="text" name="mail" pattern= "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/"required> Email <br> -->
+        <!-- 시작과 끝에 //로 감싸고, ^$로 시작하고 닫는다. 그 안에 대괄호로 내용을 넣어준다. 역슬래시\를 넣으면 특수기호를 일반문자로 취급한다. +를 통해 이어질 내용을 추가한다.-->
         <fieldset>
             <legend>성별</legend>
             <input type="radio" name="gender" value="남자" id="man"> <label for="man">남자</label>
@@ -86,6 +105,7 @@
         </fieldset>
 
         <button type="submit">회원가입</button>
+
     </form>
 </body>
 </html>

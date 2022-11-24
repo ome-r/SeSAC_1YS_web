@@ -61,6 +61,7 @@ app.get('/test', (req,res) =>{
 app.get("/forms", (req,res)=>{
     res.render("forms");
 })
+
 //get 메소드 사용
 app.get("/getforms", (req,res)=>{ // 원래 라우터였던 form에서 getform라우터로 이동한 다음 send안에 문자열이 보이게 된다.
     console.log(req.query); // 클라이언트가 서버에 보내는 요청을 'query'를 찍는다. 이는 ?뒤에 있는 것들로 터미널에 출력이 된다.
@@ -89,6 +90,12 @@ app.get('/img', (req,res)=> {
 // app.get('/ejs', (req,res) =>{
 //     res.sendFile( __dirname + "/static/img" ); //sendfile에 들어올 경로는 무조건! 절대경로가 작성되어야한다.이때 __dirname을 쓰면 알아서 이 변수가 뒤 파일의 절대 위치를 찾아준다.
 // })
+
+// //axios 사용하기
+// app.get("/forms", function(req,res){ //프론트에서 보낸 값을 서버로 받아오기
+//     console.log(req.query);
+//     res.send("이름은 : " + req.query.name); //내가 보낸 값과 이름을 합치기 
+// });
 
 app.listen( port, ()=> { //listen이라는 메소드를 통해 웹서버를 연다. 이때 인저는 두개 (포트번호, 함수)
     console.log("server open :", port);
