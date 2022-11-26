@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+    <!-- axios 불러오기 -->
+
+    <title>Document</title>
+    <script>
+        function login(){
+                        var form = document.getElementById("file_inform");
+                        axios({
+                            method: "post",
+                            url: "/form",
+                            data: {id: form.id.value, pw: form.pw.value, 
+                            name : form.name.value , age : form.age.value}
+                        }).then(function(res){
+                            // document.querySelector("#result").innerHTML = res.data;
+                        }); 
+                    }
+        </script>
+</head>
+<body>
+    <fieldset>
+        <legend>개인 정보</legend>
+        <form action="/upload-form" id="file_inform" method="POST" enctype="multipart/form-data">
+            아이디 : <input type="text" name="id"> <br>
+            비밀번호 : <input type="password" name="pw"> <br>
+            이름 : <input type="text" name="name"> <br>
+            나이 : <input type="number" name="age"> <br>
+    </fieldset>
+    <!-- <form action="/upload-form" method="POST" enctype="multipart/form-data"> -->
+        <input type="file" name="userfile"> <!--multer 미들웨어에서 'file'위까지만 처리하므로, 아래값은 나오지 않음-->
+        <button type="button">리셋</button>
+        <!--이거는 동적 폼 전송이 아닌, 자체적인 제출하기 버튼  -->
+        <button type="submit" onclick="login();">회원가입</button> 
+        <!-- 동적 폼 전송용 버튼 -->
+        <button type="button" onclick="login();">회원가입(동적)</button>
+
+        <!-- <div style="text-align:center;" id="result"></div> -->
+    </form>
+</body>
+</html>
