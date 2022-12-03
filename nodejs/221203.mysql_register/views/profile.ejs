@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+		table, th, td { border: 1px solid black; }
+        
+        .d-none {
+            display: none;
+        }
+	</style>
+
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <form id="form_register" style="margin: 20px 20px;">
+    <div class="row">
+        <h4>Profile</h4>
+    </div>
+
+    <div class="idForm" style="margin-left: 20px;">
+        <i class="material-icons prefix">ID</i><br />
+
+        <i class="material-icons prefix">Password</i><br />
+
+        <i class="material-icons prefix">Name</i> <br />
+
+    </div>
+    
+    <div>
+        <button type="button" class="btn btn-outline-primary" style="width: 300px; margin: 20px 20px 20px 20px;" onclick='login_user();'>로그인하기</button>
+    </div>
+    <div class="row">
+        <p class="margin" style="margin: 20px 20px 20px 20px;">회원을 탈퇴하시겠습니까? 다시 생각해보세요...</p>
+    </div>
+    <div style="text-align:center;" id="result">
+        <button type="button" class="btn btn-outline-danger" style="width: 300px; margin: 20px 20px 20px 20px;" onclick='delete_visitor();'>계정삭제</button>
+    </div>
+
+ 
+    </table>
+<!-- delete 키 만들고 동적으로 연결하기 따라서 axios사용, 이때 삭제는 PK 프라이머리키가 되어있는 경우에 사용가능 -->
+
+    <script>
+
+ 
+    </script>
+</body>
+</html>
+
