@@ -8,10 +8,9 @@ app.use("/static", express.static(__dirname +"/static"));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-//router를 불러왔다. (정의는 routes에서)
+//router를 불러왔다. (정의는 routes에서) 라우터를 미들웨어로 걸어놓았음 
 const router = require("./routes"); // require은 모듈을 불러오겠다는 의미. "./routes"는 상대 경로, 파일만 작성했지만 이때 이 파일로 들어가져서 알아서 index로 연결이 되니 생략이 가능
-
-//localhost:8000/vistor 로 접속해야 한다. 
+//localhost:8000/visitor 로 접속해야 한다. 
 app.use('/visitor', router);
 
 // 에러 렌더 정의는 가장 마지막에 !! 이때 * 은 모든 라우터 (어떤 글자라도 상관 없다)

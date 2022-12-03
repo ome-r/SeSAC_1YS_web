@@ -7,7 +7,12 @@
     <title>Document</title>
     <style>
 		table, th, td { border: 1px solid black; }
+        
+        .d-none {
+            display: none;
+        }
 	</style>
+
      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
      <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
@@ -16,8 +21,14 @@
     <form id="form_register">
         <fieldset style="display: inline-block;">
             <legend>방명록 등록</legend>
+            <!-- input태그에 id를 저장해야 update쪽에서 id를 사용할 수 있다. -->
+            <input type="hidden" name="id">
             이름 : <input type="text" name="name" placeholder="사용자 이름"><br>
             방명록 : <input type="text" name="comment" placeholder="방명록"><br>
+            <div class="update-btn d-none">
+                <button type="button" onclick="update_visitor();">수정</button>
+                <button type="button" onclick="update_origin();">취소</button>
+            </div>
             <div class="register-btn">
                 <button type="button" onclick="register();">등록</button>
             </div>
@@ -37,13 +48,80 @@
                 <td><%=data[i].id%></td>
                 <td><%=data[i].name%></td>
                 <td><%=data[i].comment%></td>
-                <td><button type="button">수정</button></td>
-                <td><button type="button">삭제</button></td>
+                <td><button type="button" onclick="update_load('<%=data[i].id%>', this);">수정</button></td>
+                <td><button type="button" onclick="delete_visitor('<%=data[i].id%>', this);">삭제</button></td>
+                <!-- tag에 함수를 달 때, 함수의 인자로 this를 넘겨주면, 함수가 걸려있는 태그가 this 안에 담긴다. 여기서 this의 부모는 td, tr에도 접근가능 
+                그러면 this를 받는 element에 있는 부모의 부모(parent)인 tr을 삭제할 수 있다!-->
             </tr>
         <% } %>
     </table>
+<!-- delete 키 만들고 동적으로 연결하기 따라서 axios사용, 이때 삭제는 PK 프라이머리키가 되어있는 경우에 사용가능 -->
+    <script>
+        function delete_visitor(delete_id, element){
+            axios({
+                method : 'delete',
+                url : '/visitor/delete',
+                data : {id : delete_id}
+            })
+            .then((response)=>{
+                if(response.data) element.parentElement.parentElement.remove(); 
+                else alert("알 수 없는 오류 발생!");
+                // element.parantElement.parantElement.remove(); 
+            })
+        }
+    </script>
 
     <script>
+        let update_tr; //전역변수 설정
+
+        function update_visitor(){
+            var form = document.getElementById("form_register");
+
+            axios({ //axios로 서버에 요청보내기 , 라우터에 가서 주소로 확인 
+                method: 'patch',
+                url: "/visitor/update",
+                data : { //input에 있는 부분들 
+                    id: form.id.value,
+                    name : form.name.value,
+                    comment : form.comment.value
+                }
+                })
+                .then((response)=>{
+                    //컨트롤러에서 true 응답을 받은 다음에 하는 일 
+                    update_tr.children[1].innerText = form.name.value; //tr태그의 자식들 조회(=td), 그 중 2번은 name
+                    update_tr.children[2].innerText = form.comment.value; //3번 td는 comment 
+                    //UPDATE는 위에서 끝났고 여기서부터는 INPUT에 원래 기본값(빈 문자열)로 초기화 
+                    form.id.value = "";
+                    form.name.value = "";
+                    form.comment.value = "";
+                    //이제는 반대로 d-none을 원래대로 돌려놓기 
+                    $(".update-btn").addClass("d-none");
+                    $(".register-btn").removeClass("d-none");
+                })
+        }
+
+
+        function update_load(get_id,element){
+            axios({
+                method: 'get',
+                url: "/visitor/get_visitor",
+                params: { id: get_id }
+            })
+            .then((response)=>{ //response.data에 id가 들어있다. 응답부분 
+                var form = document.getElementById("form_register");
+                // 박혀있을 부분 만들기 
+                form.id.value = response.data.id;
+                form.name.value = response.data.name;
+                form.comment.value = response.data.comment;
+           // update버튼 클래스들은 처음에 d-none이다가 제거,register는 d-none이 추가되며 서로 바뀐다.
+                $(".update-btn").removeClass("d-none");
+                $(".register-btn").addClass("d-none");
+
+                update_tr = element.parentElement.parentElement // element의 부모의 부모 담아놓기 tr (테이블의 값을 동적으로)
+            })
+        }
+
+
         function register(){
             let form = document.getElementById("form_register");
             let data = {
@@ -59,13 +137,14 @@
             .then((response) => {
                 // 이렇게 쓰는 걸 권장하진 않으나 지금은 테이블 하나만 가져오므로 이렇게 작성한다. 
                 //id는 서버에서 받아서 사용 data는 name과 comment 받아서 사용 
+                //AXIOS에 의해서 생성된 tr td는 여기서 삭제할 수 있도록 만든다. ${response.data} 에서 id 받아와서 삭제
                 $("table").append(`
                 <tr>
-                    <td>${response.data}</td>
+                    <td>${response.data}</td> 
                     <td>${data.name}</td>
                     <td>${data.comment}</td>
                     <td><button type="button">수정</button></td>
-                    <td><button type="button">삭제</button></td>
+                    <td><button type="button" onclick="delete_visitor(${response.data}, this)">삭제</button></td>
                 </tr>
                     `)
             })
