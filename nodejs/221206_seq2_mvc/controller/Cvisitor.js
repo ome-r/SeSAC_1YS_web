@@ -81,6 +81,23 @@ exports.get_visitor_by_id =  async (req, res) => {
     // });
 }
 
+    //원하는 값만 조회하려면 ?
+    // selcet id,name,comment from visitor; 
+    // selcet id,name,comment from visitor order by id DESC limit 1; >> 프로젝트 시 order by는 아주많이 쓰일 예정 ㅎ 
+    // exports.get_visitor_by_id =  async (req, res) => {
+    //     Visitor.findAll({ 
+    //         attribute : [ "id", "name", "comment"], // 가져올 필드 
+    //         where : {id : req.query.id}, // 조건문 
+    //         order: [["id", "DESC"]], //order by 사용법 
+    //         limit: 1 //리미트 걸기 
+    //     })
+    //     .then((result)=> {
+    //         res.send(result); 
+    //     })
+    // }
+
+
+
 exports.update_visitor = async (req, res) => {
     let data = {
         name : req.body.name,
@@ -92,6 +109,8 @@ exports.update_visitor = async (req, res) => {
     console.log(result);
     res.send(true); //나 업뎃성공했어! 
 }
+
+
 
     // Visitor.update(data, {  //인자 2개를 받는다 1. 어떻게 업뎃할지 2. 조건 (where id = '${req.body.id}')
     //     where: {id : req.body.id}
