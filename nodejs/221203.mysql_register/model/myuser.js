@@ -9,7 +9,7 @@ const cnn = mysql.createConnection({ //mysql에 접근하는 코드
 })
 
 //컨트롤러의 get_visitor와 매치 
-exports.get_visitor_by_id = (cb) => { //cb라는 콜백함수를 인자로 넘겨받았다 
+exports.get_visitor = (cb) => { //cb라는 콜백함수를 인자로 넘겨받았다 
     var sql = 'SELECT * FROM myuser'; //visitor라는 테이블에서 모든 정보를 조회하겠다 
 
     cnn.query(sql, (err,rows)=> { //sql문을 실행시킨 결과를 뒤에있는 매개변수 rows에 반환
@@ -36,7 +36,7 @@ exports.register_vistior = (info, cb) =>{ //req.body와 cb을 각각 인자로 �
     })
 }
 
-exports.delete_visiotr = (id ,cb) => { //id를 매개변수로 받아와야 그 아래에서 삭제할 수 있다. 
+exports.delete_visitor = (id ,cb) => { //id를 매개변수로 받아와야 그 아래에서 삭제할 수 있다. 
     var sql = `delete from myuser where id ='${id}'`;
 
     cnn.query(sql, (err, result)=>{ //sql을 실행한 다음 err랑 result를 받아올 함수 작성 
@@ -47,28 +47,36 @@ exports.delete_visiotr = (id ,cb) => { //id를 매개변수로 받아와야 그 
     })
 }
 
+exports.update_visitor = (data, cb) => {
+    let sql = `UPDATE user SET name='${data.name}', pw='${data.pw}' WHERE id='${data.id}'`;
+    cnn.query( sql, ( err ) => {
+        if ( err ) throw err;
+        cb();
+    })
+
+}
+
+exports.login = (id, pw, cb) => {
+    // id를 통해서 사용자 정보를 가져온다
+    var sql = `select * from myuser where id = '${id}' and pw= '${pw}' limit 1;`; //id pw가 값이 있으면 length가 생길테니 그걸로 성공여부를 판단
+
+    cnn.query(sql, (err, result)=>{ //sql을 실행한 다음 err랑 result를 받아올 함수 작성 
+        if (err) throw err;
+
+        console.log("user info :", result); //잘 되는 지 콘솔에 찍기 
+        cb(result);  
+    });
+}
 
 
-// // 업데이트 
-// exports.update_visitor_model = (info ,cb) => {
-//     // var sql = `update visitor set name = ?? , comment = ??? where id = ?` //이 값들이 info에 있는 것들이다 req.boy로 오는애들
-//     var sql = `update visitor set name ='${info.name}' , pw ='${info.pw}' where id = '${info.id}'`;
-// //쿼리 이용해서 실행부
-//     cnn.query(sql, (err, result)=>{ 
-//         if (err) throw err;
+exports.get_user = (id, cb) => {
+    // id를 통해서 사용자 정보를 가져온다
+    var sql = `select * from myuser where id = '${id}'`; //id pw가 값이 있으면 length가 생길테니 그걸로 성공여부를 판단
 
-//         console.log("update result : ", result); //결과를 굳이 사용하지 않고 프론트딴에서 처리가 가능하므로 비워둔다
-//         cb(); //cb안에 매개변수가 없으므로 controller에서도 받지않을것이다. 
-//     })
-// }
+    cnn.query(sql, (err, result)=>{ //sql을 실행한 다음 err랑 result를 받아올 함수 작성 
+        if (err) throw err;
 
-// exports.login_user = (info, cb) => {
-//     var sql = `update visitor set name ='${info.name}' , pw ='${info.pw}' where id = '${info.id}'`;
-//     //쿼리 이용해서 실행부
-//     cnn.query(sql, (err, result)=>{ 
-//         if (err) throw err;
-
-//         console.log("update result : ", result); 
-//         cb(result); 
-//     })
-// }
+        console.log("user info :", result); //잘 되는 지 콘솔에 찍기 
+        cb(result[0]);  
+    });
+}

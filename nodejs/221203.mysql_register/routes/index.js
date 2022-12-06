@@ -12,8 +12,15 @@ router.get("/login", controller.login); // 로그인 페이지로 넘어가기, 
 
 router.delete("/delete",controller.delete); //삭제하기 
 
-router.get("/profile", controller.get_visitor_by_id); // 프로필 받아올 예정 
+router.post("/profile", controller.profile); 
+
+router.post("/profileView", controller.profileView); 
+
+router.patch("/profile/edit", controller.profileEdit); 
+
+router.delete("/profile/delete", controller.profileDelete); 
+
 
 // router.patch("/update", controller.update_visitor); // 컨트롤러에 있는 함수와 연결 
 
-module.exports = router; 
+module.exports = router;

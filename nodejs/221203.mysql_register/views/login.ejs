@@ -19,11 +19,11 @@
 
 </head>
 <body>
-    <form id="form_register">
+    <form id="form_register" action="/user/profileView" method="post">
         <div class="row" style="margin: 20px 20px;">
             <h3>WELCOME!</h3>
         </div>
-        
+
         <div class="idForm" style="margin-left: 20px;">
             <i class="material-icons prefix">ID</i><br />
             <input type="text" id="id" class="id" name="id" placeholder="ID 4~19 Words"/><br />
@@ -32,7 +32,7 @@
             <i class="material-icons prefix">Name</i> <br />
             <input type="text" id="name" class="name" name="name" placeholder="What's your name?"/><br />
         </div>
-        
+
         <div>
             <button type="button" class="btn btn-outline-primary" style="width: 300px; margin: 20px 20px 20px 20px;" onclick='login_user();'>로그인하기</button>
         </div>
@@ -53,13 +53,42 @@
             axios({
                 method: "post",
                 url: "/user/profile",
-                data: {id: form.id.value, pw: form.pw.value}
-            }).then(function(res){
-                document.querySelector("#result").innerHTML = res.data;
+                data: {id: form.id.value, 
+                pw: form.pw.value,
+                name: form.name.value}
+            })
+            .then(function(resp) {return resp.data;})
+            .then((data) => {
+                // console.log(res.data);
+                // console.log(res.data[0].id);
+                // let user_info = res.data[0];
+                //로그인 처리는 프론트딴에서 하지말고 서버에서 한다. 
+                // if (form.id.value == user_info.id) {
+                //     if (form.pw.value == user_info.pw) {
+                //         console.log("로그인 성공!");
+                //         // window.location.href = "/user/profile"; 이렇게 하면 get이므로 profile은 post로 보내주기 위해 폼전송으로 해야한다.
+                //     }
+                // } else {
+                //     console.log("id나 PW가 동일하지 않습니다");
+                //     form.reset();
+                // }
+                if ( data == true ){
+                        alert("로그인 성공");
+
+                        form.submit();
+                    } else {
+                        alert("로그인 실패");
+                        form.reset();
+                    }
             }); 
         }
-
-        // var form = document.getElementById("form_register");
+        //짧게 처리시
+        // if (form.id.value == res.id && form.pw.value == res.pw) {
+        //     console.log("로그인 성공!");
+        //     window.location.href = '다음에 넘어갈화면' 
+        //  } else {
+        //     console.log("id 또는 pw가 다릅니다.")
+        //   }
         function delete_visitor(){
             let form = document.getElementById("form_register");
             let data = {
@@ -73,11 +102,10 @@
                 data : data
             })
             .then((response)=>{
-                window.location.href = "/user"; // profile창으로 열기 
+                window.location.href = "/user";  
             })
         }
     </script>
 
 </body>
 </html>
-

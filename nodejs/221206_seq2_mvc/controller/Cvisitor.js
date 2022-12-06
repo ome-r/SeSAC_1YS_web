@@ -2,7 +2,9 @@
 const { Visitor } = require("../model"); //객체구조분해 할당. vistior만 필요, index.js는 생략가능 
 
 exports.visitor = async (req, res) => { //sequelize는 프라미스이므로 then 사용하기 >> async await도 사용가능! 
-    let result = await Visitor.findAll(); //시퀄라이즈 모듈은 순서대로 실행하기 위해 프라미스를 사용했다. 가독성이 좋게 하기 위해 async await 사용 
+    let result = await Visitor.findAll(
+        // {order: [["id", "DESC"]], limit : 2}
+    ); //시퀄라이즈 모듈은 순서대로 실행하기 위해 프라미스를 사용했다. 가독성이 좋게 하기 위해 async await 사용 
     // 기다렸다가  Visitor.findAll(); 이거 실행해서 result에 담은 다음에, 그 아래로 가서 render하기 위해 사용! 
     // then으로 받아올 것을 let result에 담은 것이므로 then은 사용하지 않는다. 
     res.render("visitor", {data: result});  
