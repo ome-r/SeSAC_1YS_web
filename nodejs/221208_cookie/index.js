@@ -6,6 +6,11 @@ const port = 8000;
 
 app.set("view engine", "ejs");
 
+app.use("/static", express.static(__dirname+"/static"));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+
 //세션등록
 app.use(session({ //세션 미들웨어 등록하기 
     secret: '1234', //무조건 사용하기! 임의의 문자열을 가지고 세션 암호화  
@@ -21,23 +26,56 @@ app.use(session({ //세션 미들웨어 등록하기
 // 로그인을 세션을 통해서 검증하기 
 const user = {id: "aaa", pw :"1234" }; //일때 
 
+// app.get("/", (req,res)=>{
+//     // if(req.session.user)가 있으면 로그인 성공한 사람이므로 프로필창을 보여주고 하는 방식으로 작동
+//     if(req.session.user) res.render("success", {islogin:true})
+//     else res.render("main", {islogin: false})
+//     // res.send("세션 수업"); 
+// })
+
+// // 메인 페이지 렌더 
+// app.get("/main", (req,res)=>{
+//     res.render("main"); 
+// })
+
+
+// // 로그인 페이지 렌더 
+// app.get("/login", (req,res)=>{
+//     res.render("login"); 
+// })
+
+//s_index 해설용 
 app.get("/", (req,res)=>{
-    // if(req.session.user)가 있으면 로그인 성공한 사람이므로 프로필창을 보여주고 하는 방식으로 작동
-    if(req.session.user) res.render("success", {islogin:true})
-    else res.render("main", {islogin: false})
-    // res.send("세션 수업"); 
+    // 로그인이 되어있는 사람인지 아닌지 검증 req.session.user에 있는가
+    console.log(req.session.user);
+    if(req.session.user) res.render("s_index", {islogin : true, id: req.session.user});
+    else res.render("s_index", {islogin : false});
 })
 
-// 메인 페이지 렌더 
-app.get("/main", (req,res)=>{
-    res.render("main"); 
+//get 요청에 렌더 
+app.get("/s_login", (req,res)=>{
+    res.render("s_login")
 })
 
+// id, pw 비교하기, 성공 실패값도 보내주기 
+app.post("/s_login", (req,res)=>{
+    if(req.body.id == user.id && req.body.pw == user.pw) {
+        // 클라이언트마다 있는 session이라는 공간안에다가 id가 저장되어 있다. 
+        req.session.user = req.body.id;
+        res.send(true);
+    } else {
+        res.send(false); 
+    }
+ })
 
-// 로그인 페이지 렌더 
-app.get("/login", (req,res)=>{
-    res.render("login"); 
-})
+ // logout 
+ app.get("/s_logout", (req,res)=>{
+    req.session.destroy(function(err){
+        if(err) throw err;
+
+        res.redirect("/"); 
+    })
+ })
 
 // // 등록 페이지 true값 보내주기 
 // app.post("/user/register", (req,res)=>{
