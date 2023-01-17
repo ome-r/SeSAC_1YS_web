@@ -1,0 +1,12 @@
+div.component-root {
+  background-color: aquamarine;
+}
+
+div.component-root h1 {
+  color: blueviolet;
+}
+
+div.component-root span {
+  background-color: #ccc;
+  font-weight: 700;
+}
