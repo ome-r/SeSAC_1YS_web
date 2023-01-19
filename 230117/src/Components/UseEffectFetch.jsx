@@ -21,6 +21,7 @@ export default function UseEffectFetch() {
   //위의 useEffect보다 얘네가 먼저 실행
   return (
     <>
+      {/* 빈배열[].map을 그려주면 오류가 나지않아 초깃값을 []로한다. 만약 undefined.map이라면 오류가 난다 */}
       {dataArr.map((el, index) => {
         return (
           <ProfileComponent
