@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <!-- redux 연결 CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js"></script>
+    <style>
+      .container {
+        border: 3px solid black;
+        padding: 10px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="red">
+      <div class="container" id="component_red">
+        <h1>red</h1>
+        <input
+          type="button"
+          value="실행"
+          onclick="store.dispatch({type:'CHANGE', color:'red'});"
+        />
+        <!-- <input type="button" value="실행" onclick="red()" 이 안에 이제 액션을 담는다. /> -->
+      </div>
+    </div>
+    <div id="green">
+      <div class="container" id="component_green">
+        <h1>green</h1>
+        <input type="button" value="실행" onclick="green();" />
+      </div>
+    </div>
+    <div id="yellow">
+      <div class="container" id="component_yellow">
+        <h1>yellow</h1>
+        <input type="button" value="실행" onclick="yellow();" />
+      </div>
+    </div>
+    <script>
+      function reducer(state = { color: 'orange' }, action) {
+        // = { color: 'orange' } 이렇게 기본값을 세팅한다.
+        //state값과 action을 인자로
+        // console.log(action);
+        if (action.type == 'CHANGE') return { color: action.color }; // 타입이 change라면 컬러 값을 보내줘라
+        return state; //변경된 state 리턴
+      }
+      var store = Redux.createStore(reducer); // store를 만들고, 리듀서 등록하기
+
+      function red() {
+        var state = store.getState();
+        document.querySelector('#component_red').style.backgroundColor =
+          state.color;
+        // document.querySelector('#component_red').style.backgroundColor = 'red';
+        // document.querySelector('#component_green').style.backgroundColor =
+        //   'red';
+        // document.querySelector('#component_yellow').style.backgroundColor =
+        //   'red';
+      }
+      function green() {
+        document.querySelector('#component_red').style.backgroundColor =
+          'green';
+        document.querySelector('#component_green').style.backgroundColor =
+          'green';
+        document.querySelector('#component_yellow').style.backgroundColor =
+          'green';
+      }
+      function yellow() {
+        document.querySelector('#component_red').style.backgroundColor =
+          'yellow';
+        document.querySelector('#component_green').style.backgroundColor =
+          'yellow';
+        document.querySelector('#component_yellow').style.backgroundColor =
+          'yellow';
+      }
+      //   function change() {
+      //     var state = store.getState();
+      //     document.querySelector('#component_red').style.backgroundColor =
+      //       state.color;
+      //     document.querySelector('#component_green').style.backgroundColor =
+      //       state.color;
+      //     document.querySelector('#component_yellow').style.backgroundColor =
+      //       state.color;
+      //   }
+
+      // 내가 만든 함수 실행
+      //   alert(store.getState().color);
+      //렌더하는 함수를 가져오는 함수 subscribe -- react와 달리 리렌더링이 일어나지 않으므로 이 과정이 필요
+      //   store.subscribe(change);
+      store.subscribe(red);
+    </script>
+  </body>
+</html>
