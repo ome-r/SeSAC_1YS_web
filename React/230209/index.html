@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <title>socket.io</title>
+    <script
+      src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+      integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .container {
+        position: relative;
+        left: 30%;
+        width: 500px;
+        height: 600px;
+        padding: 20px;
+        background-color: rgb(124, 185, 170);
+        overflow-y: auto;
+        /* border-radius: 5%; */
+      }
+      .notice {
+        text-align: center;
+        color: white;
+      }
+      .container div div {
+        display: inline-block;
+        padding: 10px;
+      }
+      .container div {
+        margin-bottom: 10px;
+      }
+      .my-chat {
+        text-align: right;
+      }
+      .my-chat div {
+        background-color: rgb(239, 232, 164);
+        border-radius: 5%;
+      }
+      .other-chat {
+        text-align: left;
+      }
+      .other-chat div {
+        background-color: white;
+        border-radius: 5%;
+      }
+      .my-dm {
+        text-align: right;
+      }
+      .dm div {
+        background-color: lightpink;
+        border-radius: 5%;
+      }
+      .footer {
+        position: relative;
+        left: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="notice">공지 메세지</div>
+      <div class="my-chat">
+        <div>내가 보낸 메세지</div>
+      </div>
+      <div class="other-chat">
+        <div>남이 보낸 메세지</div>
+      </div>
+      <div class="dm my-dm">
+        <div>(속닥속닥) 내가 보낸 디엠</div>
+      </div>
+      <div class="dm">
+        <div>(속닥속닥) 남이 보낸 디엠</div>
+      </div>
+    </div>
+    <div class="footer">
+      <select id="members">
+        <option value="전체">전체</option>
+      </select>
+      <input type="text" id="msg_box" onkeydown="enter()" />
+      <button onclick="btnSend()">🎇</button>
+    </div>
+
+    <script>
+      //닉네임 받기
+      const username = prompt('닉네임을 입력해주세요');
+      //연결
+      const socket = io.connect();
+
+      socket.on('connect', () => {
+        console.log('server connected');
+
+        //닉네임 보내주기
+        socket.emit('username', username);
+      });
+
+      // 다른부분에서 사용하려면 변수선언
+      let my_id = ''; //할당하기
+      socket.on('info', (socketID) => {
+        my_id = socketID;
+      });
+
+      // 입장, 퇴장을 알려주는 이벤트 notice 생성
+      socket.on('notice', (msg) => {
+        // 컨테이너를 가져오고
+        const container = document.querySelector('.container');
+        // div를 만들겠다
+        const div = document.createElement('div');
+        //받은 메세지를 넣기
+        div.textContent = msg;
+        // 컨테이너 아래에 차일드로 div생성
+        container.appendChild(div);
+      });
+
+      // 메세지 받기
+      socket.on('newMSG', (json) => {
+        //msg: 메세지 from: 보낸사람 소켓 아이디, username: 보낸사람 닉네임
+        //json = {msg:~~~~} //값 추가하기 // from 값도 들어온다 json = {msg:~~~ , from:~~~}
+        // json = {msg : ~~~, from : ~~~~, username:~~~}
+        const container = document.querySelector('.container'); //컨테이너 가져오고
+        //div가 두개 이므로
+        const outer_div = document.createElement('div');
+        const div = document.createElement('div');
+        // 안에 메시지 추가
+        div.textContent = json.username + ':' + json.msg;
+
+        //채팅 구분하기
+        if (my_id == json.from) {
+          if (json.is_dm) outer_div.classList.add('my-dm', 'dm');
+          else outer_div.classList.add('my-chat');
+        } else {
+          if (json.is_dm) outer_div.classList.add('dm');
+          else outer_div.classList.add('other-chat');
+        }
+
+        //div 넣어주기
+        outer_div.appendChild(div);
+        container.appendChild(outer_div);
+      });
+      // 리스트 받아서 사람 알아내기
+      socket.on('list', (list) => {
+        console.log(list);
+        //특정 사람 선택후 디엠 //셀렉트 박스 선택한 다음 내용을 지워줄예정
+        const member_list = document.getElementById('members');
+        //select box option tag 모두 지우기
+        //첫번째 요소가 남아 있으면 while문이 계속 돌면서 뒤의 요소를 지워준다 >> 하나도 남지않을때까지
+        while (member_list.firstChild)
+          member_list.removeChild(member_list.lastChild);
+        //option 만들어 추가 >> 항상 첫번재는 전체에게 보내는 설정
+        const option = document.createElement('option');
+        option.text = '전체';
+        option.value = '전체';
+        member_list.appendChild(option);
+        // // 2차원 배열을 생성하는  Object.entries
+        // console.log(Object.entries(list));
+        for (let [key, value] of Object.entries(list)) {
+          //리스트에 닉네임을 추가
+          const option = document.createElement('option');
+          option.text = value;
+          option.value = value;
+          member_list.appendChild(option);
+        }
+      });
+
+      const btnSend = () => {
+        const input = document.getElementById('msg_box');
+        // {to : to} 와 같다. //to 라는 정보 추가
+        const to = document.getElementById('members').value;
+        // 인풋상자에서 내부 값 보내주기
+        socket.emit('send', { msg: input.value, to }); //인풋상자 내부값 서버로
+      };
+
+      const enter = () => {
+        if (event.keyCode == 13) {
+          btnSend();
+        }
+      };
+    </script>
+  </body>
+</html>

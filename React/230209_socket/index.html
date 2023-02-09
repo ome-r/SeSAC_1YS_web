@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.io</title>
+    <script
+      src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+      integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="styled.css" />
+  </head>
+  <body>
+    <!-- <h2>Socket.io 사용하기</h2> -->
+    <!-- <h2>Hello World!</h2>
+    <button id="hello1" onclick="hello_click();">Hello</button>
+    <button id="study1" onclick="study_click();">Study</button>
+    <button id="bye1" onclick="bye_click();">Bye</button> -->
+    <div class="container">
+      <!-- <div class="header">CHAT</div> -->
+      <div class="notice">공지메세지</div>
+      <div class="my-chat">
+        <div>내가 보낸메세지</div>
+      </div>
+      <div class="other-chat">
+        <div>남이 보낸메세지</div>
+      </div>
+      <div class="dm my-dm">
+        <div>(속닥속닥) 내가 보낸 디엠</div>
+      </div>
+      <div class="dm">
+        <div>(속닥속닥) 남이 보낸 디엠</div>
+      </div>
+    </div>
+    <script>
+      //메세지 보내기 : socket.emit("이벤트명", data)
+      //메세지 받기 : socket.on("이벤트명", (data) =>) //보낸 데이터가 콜백함수 인자로 들어온다
+
+      // 소켓 연결부 (클라이언트) : 클라이언트 소켓 생성 후 연결
+      let socket = io.connect();
+
+      // 이걸 사용한 순간, vscode와 크롬에서 둘다 서버연결 확인 가능
+      socket.on('connect', () => {
+        console.log('server connected');
+      });
+
+      socket.on('notice', (msg) => {
+        const container = document.querySelector('.container');
+        const div = document.createElement('div');
+        div.textContent = msg;
+        container.appendChild(div);
+      });
+
+      // //   클라이언트 서버 주고받기
+      // socket.on('welcome', (data) => {
+      //   //data : {msg : ''}
+      //   console.log(data.msg);
+      //   // 답장하기 _ welcome이라는 메세지를 받았을때 보내주기 위해 같이 적음
+      //   socket.emit('response', 'Hello');
+      // });
+
+      // //   클릭시 메세지 전송
+      // function hello_click() {
+      //   let socket = io.connect();
+
+      //   socket.emit('hello', 'client Hello!');
+      //   socket.on('hello2', (str) => {
+      //     console.log(str);
+      //   });
+      // }
+
+      // function study_click() {
+      //   let socket = io.connect();
+
+      //   socket.emit('study', 'client study!');
+      //   socket.on('study2', (str) => {
+      //     console.log(str);
+      //   });
+      // }
+
+      // function bye_click() {
+      //   let socket = io.connect();
+
+      //   socket.emit('bye', 'client bye!');
+      //   socket.on('bye2', (str) => {
+      //     console.log(str);
+      //   });
+      // }
+    </script>
+  </body>
+</html>
